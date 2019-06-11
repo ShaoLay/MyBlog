@@ -1,186 +1,108 @@
 {% extends 'base.html' %}
+{% load blog_tags %}
 
 {% block content %}
-    <div class="content-body">
-        <div class="container">
-            <div class="row">
-                <main class="col-md-8">
-                    {% for article in article_list %}
+    <div class="row">
 
-                        <article class="post post-1">
-                            <header class="entry-header">
-                                <h1 class="entry-title">
-                                    <a href="single.html">{{ article.title }} </a>
-                                </h1>
-                                <div class="entry-meta">
-                                    <span class="post-category"><a href="#">{{ article.category.name }}</a></span>
+        <div class="col-sm-8 blog-main">
 
-                                    <span class="post-date">
-                                        <a href="#">
-                                            <time class="entry-date"
-                                                  datetime="{{ article.created_time }}">{{ article.created_time|date:'Y年n月j日' }}</time>
-                                        </a>
-                                    </span>
+            {% for article in article_list %}
+                <div class="blog-post">
+                    <a href="{{ article.get_absolute_url }}" class="blog-post-title">{{ article.title }}</a>
 
-                                    <span class="post-author"><a href="#">{{ article.author.username }}</a></span>
-                                    {% load comments_tags %}
-                                    <span class="comments-link"><a
-                                            href="#">{% get_comment_count for article.pk %}</a></span>
-                                </div>
-                            </header>
-                            <div class="entry-content clearfix">
+                    <p class="blog-post-meta"><a
+                            href="{{ article.category.get_absolute_url }}">{{ article.category.name }}</a>
+                        <time class="entry-date"
+                              datetime="{{ article.created_time }}">
+                            {% comment %}{{ article.created_time|date:'Y年n月j日' }}{% endcomment %}
+                            {% timeformat article.created_time %}
+                        </time>
+                        by <a href="{{ article.author.get_absolute_url }}">{{ article.author }}</a></p>
 
+                    {{ article.body|custom_markdown }}
+                </div><!-- /.blog-post -->
 
-                                <p>
-                                    {% load blog_tags %}
-                                    {% timeformat article.created_time %}
-                                    {{ article.body }}
-                                </p>
-                                <div class="read-more cl-effect-14">
-                                    <a href="#" class="more-link">Continue reading <span class="meta-nav">→</span></a>
-                                </div>
-                            </div>
-                        </article>
-
-
-                    {% endfor %}
+            {% endfor %}
 
 
 
+            {% comment %}<div class="blog-post">
+                <h2 class="blog-post-title">Another blog post</h2>
+                <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
 
+                <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus.
+                    Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere
+                    consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+                <blockquote>
+                    <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare
+                        vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </blockquote>
+                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet
+                    fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo
+                    luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac
+                    consectetur ac, vestibulum at eros.</p>
+            </div><!-- /.blog-post -->
 
-                    {% comment %}<article class="post post-2">
-                        <header class="entry-header">
-                            <h1 class="entry-title">
-                                <a href="single.html">Adaptive Vs. Responsive Layouts And Optimal Text Readability</a>
-                            </h1>
-                            <div class="entry-meta">
-                                <span class="post-category"><a href="#">Web Design</a></span>
+            <div class="blog-post">
+                <h2 class="blog-post-title">New feature</h2>
+                <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
 
-                                <span class="post-date"><a href="#"><time class="entry-date"
-                                                                          datetime="2012-11-09T23:15:57+00:00">February 2, 2013</time></a></span>
+                <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia
+                    bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus,
+                    tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet
+                    risus.</p>
+                <ul>
+                    <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+                    <li>Donec id elit non mi porta gravida at eget metus.</li>
+                    <li>Nulla vitae elit libero, a pharetra augue.</li>
+                </ul>
+                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet
+                    fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+            </div><!-- /.blog-post -->{% endcomment %}
 
-                                <span class="post-author"><a href="#">Albert Einstein</a></span>
+            <nav>
+                <ul class="pager">
+                    <li><a href="#">Previous</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </nav>
 
-                                <span class="comments-link"><a href="#">4 Comments</a></span>
-                            </div>
-                        </header>
-                        <div class="entry-content clearfix">
-                            <p>Responsive web design offers us a way forward, finally allowing us to design for the ebb
-                                and
-                                flow of things. There are many variations of passages of Lorem Ipsum available, but the
-                                majority have suffered alteration in some form, by injected humour, or randomised words
-                                which don’t look even slightly.</p>
-                            <div class="read-more cl-effect-14">
-                                <a href="#" class="more-link">Continue reading <span class="meta-nav">→</span></a>
-                            </div>
-                        </div>
-                    </article>
+        </div><!-- /.blog-main -->
 
-                    <article class="post post-3">
-                        <header class="entry-header">
-                            <h1 class="entry-title">
-                                <a href="single.html">Adaptive Vs. Responsive Layouts And Optimal Text Readability</a>
-                            </h1>
-                            <div class="entry-meta">
-                                <span class="post-category"><a href="#">Web Design</a></span>
-
-                                <span class="post-date"><a href="#"><time class="entry-date"
-                                                                          datetime="2012-11-09T23:15:57+00:00">February 2, 2013</time></a></span>
-
-                                <span class="post-author"><a href="#">Albert Einstein</a></span>
-
-                                <span class="comments-link"><a href="#">4 Comments</a></span>
-                            </div>
-                        </header>
-                        <div class="entry-content clearfix">
-                            <p>Responsive web design offers us a way forward, finally allowing us to design for the ebb
-                                and
-                                flow of things. There are many variations of passages of Lorem Ipsum available, but the
-                                majority have suffered alteration in some form, by injected humour, or randomised words
-                                which don’t look even slightly.</p>
-                            <div class="read-more cl-effect-14">
-                                <a href="#" class="more-link">Continue reading <span class="meta-nav">→</span></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="post post-4">
-                        <header class="entry-header">
-                            <h1 class="entry-title">
-                                <a href="single.html">Adaptive Vs. Responsive Layouts And Optimal Text Readability</a>
-                            </h1>
-                            <div class="entry-meta">
-                                <span class="post-category"><a href="#">Web Design</a></span>
-
-                                <span class="post-date"><a href="#"><time class="entry-date"
-                                                                          datetime="2012-11-09T23:15:57+00:00">February 2, 2013</time></a></span>
-
-                                <span class="post-author"><a href="#">Albert Einstein</a></span>
-
-                                <span class="comments-link"><a href="#">4 Comments</a></span>
-                            </div>
-                        </header>
-                        <div class="entry-content clearfix">
-                            <p>Responsive web design offers us a way forward, finally allowing us to design for the ebb
-                                and
-                                flow of things. There are many variations of passages of Lorem Ipsum available, but the
-                                majority have suffered alteration in some form, by injected humour, or randomised words
-                                which don’t look even slightly.</p>
-                            <div class="read-more cl-effect-14">
-                                <a href="#" class="more-link">Continue reading <span class="meta-nav">→</span></a>
-                            </div>
-                        </div>
-                    </article>{% endcomment %}
-                </main>
-                <aside class="col-md-4">
-                    <div class="widget widget-recent-posts">
-                        <h3 class="widget-title">Recent Posts</h3>
-                        <ul>
-                            <li>
-                                <a href="#">Adaptive Vs. Responsive Layouts And Optimal Text Readability</a>
-                            </li>
-                            <li>
-                                <a href="#">Web Design is 95% Typography</a>
-                            </li>
-                            <li>
-                                <a href="#">Paper by FiftyThree</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="widget widget-archives">
-                        <h3 class="widget-title">Archives</h3>
-                        <ul>
-                            <li>
-                                <a href="#">November 2014</a>
-                            </li>
-                            <li>
-                                <a href="#">September 2014</a>
-                            </li>
-                            <li>
-                                <a href="#">January 2013</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="widget widget-category">
-                        <h3 class="widget-title">Category</h3>
-                        <ul>
-                            <li>
-                                <a href="#">Web Design</a>
-                            </li>
-                            <li>
-                                <a href="#">Web Development</a>
-                            </li>
-                            <li>
-                                <a href="#">SEO</a>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            <div class="sidebar-module sidebar-module-inset">
+                <h4>About</h4>
+                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet
+                    fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
             </div>
-        </div>
-    </div>
+            <div class="sidebar-module">
+                <h4>Archives</h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">March 2014</a></li>
+                    <li><a href="#">February 2014</a></li>
+                    <li><a href="#">January 2014</a></li>
+                    <li><a href="#">December 2013</a></li>
+                    <li><a href="#">November 2013</a></li>
+                    <li><a href="#">October 2013</a></li>
+                    <li><a href="#">September 2013</a></li>
+                    <li><a href="#">August 2013</a></li>
+                    <li><a href="#">July 2013</a></li>
+                    <li><a href="#">June 2013</a></li>
+                    <li><a href="#">May 2013</a></li>
+                    <li><a href="#">April 2013</a></li>
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4>Elsewhere</h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ol>
+            </div>
+        </div><!-- /.blog-sidebar -->
 
-
+    </div><!-- /.row -->
 {% endblock %}

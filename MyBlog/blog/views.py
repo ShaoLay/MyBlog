@@ -9,7 +9,7 @@ from blog.models import Article, Category
 
 class IndexView(ListView):
 
-    template_name = 'blog/index.html'
+    template_name = 'index.html'
     context_object_name = 'article_list'
 
     def get_queryset(self):

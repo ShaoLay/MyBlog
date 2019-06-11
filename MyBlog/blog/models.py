@@ -34,9 +34,8 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'article_id': self.pk})
 
-    def getCategoryNameTree(self):
+    def get_category_tree(self):
         names = []
-        names.append((settings.SITE_NAME, 'http://127.0.0.1:8000'))
 
         def parse(category):
             names.append((category.name,category.get_absolute_url()))
@@ -47,7 +46,7 @@ class Article(models.Model):
         return names
 
     def save(self, *args, **kwargs):
-        self.summary = self.summary or self.body[:120]
+        self.summary = self.summary or self.body[:settings.ARTICLE_SUB_LENGTH]
         super().save(*args, **kwargs)
 
     def viewed(self):
@@ -80,6 +79,14 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('blog:tag_detail', kwargs={'tag_name': self.name})
+
+    def get_article_count(self):
+        """文章数量"""
+        return Article.objects.filter(tags__name=self.name).distinct().count()
+
 
     class Meta:
         ordering = ['name']

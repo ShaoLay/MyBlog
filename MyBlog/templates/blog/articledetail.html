@@ -10,18 +10,20 @@
 
             <div class="blog-post">
                 <a href="#" class="blog-post-title">{{ article.title }}</a>
-                {% parseCategoryName article %}
+                {% parsecategoryname article %}
                 <p class="blog-post-meta">{% comment %}<a href="#">{{ article.category.name }}</a>{% endcomment %}
                     <time class="entry-date"
                           datetime="{{ article.created_time }}">
                         {% timeformat article.created_time %}
                     </time>
-                    by <a href="#">{{ article.author }}</a></p>
+                    by <a href="#">{{ article.author }}</a>
+                    <span class="views">{{ article.views }} views</span>
+                </p>
 
                 {{ article.body|custom_markdown }}
             </div><!-- /.blog-post -->
 
-
+            {% loadarticletags article %}
             {% comment %}<div class="blog-post">
                 <h2 class="blog-post-title">Another blog post</h2>
                 <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>

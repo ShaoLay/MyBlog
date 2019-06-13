@@ -133,6 +133,11 @@ SITE_NAME = 'Django Blog'
 SITE_DESCRIPTION = '劭焱'
 ARTICLE_SUB_LENGTH = 300
 
+# bootstrap颜色样式
 BOOTSTRAP_COLOR_TYPES = [
     'default', 'primary', 'success', 'info', 'warning', 'danger'
 ]
+
+# 侧边栏文章数目
+SIDEBAR_ARTICLE_COUNT = 10
+

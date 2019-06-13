@@ -8,7 +8,6 @@ from django.views.generic.edit import CreateView, FormView
 from django.views.generic.dates import YearArchiveView, MonthArchiveView
 from blog.models import Article, Category, Tag
 from django.conf import settings
-import markdown
 from django.template.defaultfilters import stringfilter
 from django.utils.safestring import mark_safe
 from django.core.exceptions import ObjectDoesNotExist

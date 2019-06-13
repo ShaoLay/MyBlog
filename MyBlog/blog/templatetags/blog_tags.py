@@ -39,13 +39,6 @@ def custom_markdown(content):
     return mark_safe(markdown2.markdown(force_text(content),
                                         extras=["fenced-code-blocks", "cuddled-lists", "metadata", "tables",
                                                 "spoiler"]))
-    """
-    return mark_safe(markdown.markdown(content,
-                                       extensions=
-                                       ['markdown.extensions.fenced_code',
-                                        'markdown.extensions.codehilite'],
-                                       safe_mode=True, enable_attributes=False))
-    """
 
 
 @register.inclusion_tag('blog/tags/breadcrumb.html')
@@ -121,3 +114,7 @@ def gravatar_url(email, size=40):
 def gravatar(email, size=40):
     url = gravatar_url(email, size)
     return mark_safe('<img src="%s" height="%d" width="%d">' % (url, size, size))
+
+@register.simple_tag
+def query(qs, **kwargs):
+    return qs.filter(**kwargs)

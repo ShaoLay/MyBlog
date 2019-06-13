@@ -135,7 +135,7 @@ AUTH_USER_MODEL = 'accounts.BlogUser'
 TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
-SITE_NAME = 'Django Blog'
+SITE_NAME = '黄金时代'
 SITE_DESCRIPTION = '劭焱'
 ARTICLE_SUB_LENGTH = 300
 

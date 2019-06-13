@@ -8,13 +8,13 @@ from blog.models import Article
 register = template.Library()
 
 
-@register.simple_tag(name='get_comment_count')
-def GetCommentCount(parser, token):
-    commentcount = Comment.objects.filter(article__author_id=token).count()
-    return "0" if commentcount == 0 else str(commentcount) + " comments"
-
-@register.inclusion_tag('comments/tags/post_comment.html')
-def load_post_comment(article):
-    return {
-        'article':article
-    }
+# @register.simple_tag(name='get_comment_count')
+# def GetCommentCount(parser, token):
+#     commentcount = Comment.objects.filter(article__author_id=token).count()
+#     return "0" if commentcount == 0 else str(commentcount) + " comments"
+#
+# @register.inclusion_tag('comments/tags/post_comment.html')
+# def load_post_comment(article):
+#     return {
+#         'article':article
+#     }

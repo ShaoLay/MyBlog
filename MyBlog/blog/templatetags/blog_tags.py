@@ -1,5 +1,18 @@
 #!/usr/bin/env python
 # encoding: utf-8
+
+
+"""
+@version: ??
+@author: liangliangyy
+@license: MIT Licence
+@contact: liangliangyy@gmail.com
+@site: https://www.lylinux.org/
+@software: PyCharm
+@file: blog_tags.py
+@time: 2016/11/2 下午11:10
+"""
+
 from django import template
 from django.conf import settings
 import markdown2
@@ -36,6 +49,14 @@ def custom_markdown(content):
     return mark_safe(markdown2.markdown(force_text(content),
                                         extras=["fenced-code-blocks", "cuddled-lists", "metadata", "tables",
                                                 "spoiler"]))
+    """
+    return mark_safe(markdown.markdown(content,
+                                       extensions=
+                                       ['markdown.extensions.fenced_code',
+                                        'markdown.extensions.codehilite'],
+                                       safe_mode=True, enable_attributes=False))
+    """
+
 
 @register.inclusion_tag('blog/breadcrumb.html')
 def parsecategoryname(article):
@@ -76,3 +97,19 @@ def loadsidebartags():
         'most_read_articles': most_read_articles,
         'article_dates': dates
     }
+
+
+@register.inclusion_tag('blog/tags/article_meta_info.html')
+def loadarticlemetas(article):
+    return {
+        'article': article
+    }
+
+
+@register.inclusion_tag('blog/tags/article_info.html')
+def load_article_detail(article, isindex):
+    return {
+        'article': article,
+        'isindex': isindex
+    }
+

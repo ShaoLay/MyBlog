@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pagedown',
     'blog',
-    'accounts',
+    'account',
     'comments'
 
 ]
@@ -53,6 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'MyBlog.urls'
+LOGIN_URL = '/login/'
 
 TEMPLATES = [
     {
@@ -130,7 +131,7 @@ STATIC_ROOT = os.path.join(SITE_ROOT, 'collectedstatic')
 STATIC_URL = '/static/'
 STATICFILES = os.path.join(BASE_DIR, 'static')
 
-AUTH_USER_MODEL = 'accounts.BlogUser'
+AUTH_USER_MODEL = 'account.BlogUser'
 
 TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'

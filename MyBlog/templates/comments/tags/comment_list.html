@@ -12,7 +12,7 @@
         <div id="commentlist-container" class="comment-tab" style="display: block;">
 
             <ol class="commentlist">
-                {% query article_comments parent_comment_id=None as parent_comments %}
+                {% query article_comments parent_comment=None as parent_comments %}
                 {% for comment in parent_comments %}
                     {% show_comment_item comment False %}
 

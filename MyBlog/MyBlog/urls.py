@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include(('blog.urls', 'blog'),namespace='blog')),
     url(r'', include(('comments.urls', 'comments'), namespace='comments')),
+    url(r'', include(('account.urls', 'account'), namespace='account')),
 
 ]

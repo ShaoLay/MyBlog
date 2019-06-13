@@ -60,7 +60,7 @@ class ArticleDetailView(DetailView):
                 return None
 
         form = CommentForm()
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             user = self.request.user
             form.fields["email"].initial = user.email
             form.fields["name"].initial = user.username

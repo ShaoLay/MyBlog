@@ -24,7 +24,7 @@ SECRET_KEY = '&3g0bdza#c%dm1lf%5gi&0-*53p3t0m*hmcvo29cn^$ji7je(c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.hamdi.com', '127.0.0.1']
 
 # Application definition
 
@@ -122,6 +122,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+
+SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
+SITE_ROOT = os.path.abspath(os.path.join(SITE_ROOT, '../'))
+
+STATIC_ROOT = os.path.join(SITE_ROOT, 'collectedstatic')
 STATIC_URL = '/static/'
 STATICFILES = os.path.join(BASE_DIR, 'static')
 

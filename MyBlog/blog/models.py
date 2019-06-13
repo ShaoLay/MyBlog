@@ -58,6 +58,10 @@ class Article(models.Model):
         self.views += 1
         self.save(update_fields=['views'])
 
+    def comment_list(self):
+        comments = self.comment_set.all()
+        parent_comments = comments.filter(parent_comment=None)
+
 
 class Category(models.Model):
     """文章分类"""

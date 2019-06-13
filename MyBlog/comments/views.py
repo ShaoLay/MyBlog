@@ -44,5 +44,5 @@ class CommentPostView(FormView):
         comment.author = BlogUser.objects.get(pk=author_id)
         comment.article = article
         comment.save()
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect(article.get_absolute_url())
 

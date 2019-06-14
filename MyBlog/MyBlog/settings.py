@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'pagedown',
     'blog',
     'account',
-    'comments'
-
+    'comments',
 ]
 
 MIDDLEWARE = [
